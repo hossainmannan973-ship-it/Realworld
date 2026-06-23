@@ -1,4 +1,3 @@
-Index.html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -70,7 +69,7 @@ Index.html
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
-    const FINNHUB_KEY =d8tel2hr01qhcnk26lb0d8tel2hr01qhcnk26lbg; // ← Finnhub API Key বসাও
+    const FINNHUB_KEY = "d8tel2hr01qhcnk26lb0d8tel2hr01qhcnk26lbg"; // ← এখানে কোটেশন চিহ্ন (" ") বসিয়ে দেওয়া হয়েছে
     const correctPass = "world123";
 
     function checkPass() {
@@ -107,7 +106,7 @@ Index.html
       try {
         // Oil & World Indices (Finnhub)
         const oil = await (await fetch(`https://finnhub.io/api/v1/quote?symbol=USO&token=${FINNHUB_KEY}`)).json();
-        document.getElementById("oil").innerHTML = `<div class="card"><div>Oil (Brent/USO)</div><div class="value">\[ {(oil.c || 77).toFixed(2)}</div></div>`;
+        document.getElementById("oil").innerHTML = `<div class="card"><div>Oil (Brent/USO)</div><div class="value">$${(oil.c || 77).toFixed(2)}</div></div>`; // ← এখানে সিনট্যাক্স ঠিক করা হয়েছে
 
         const spx = await (await fetch(`https://finnhub.io/api/v1/quote?symbol=SPX&token=${FINNHUB_KEY}`)).json();
         document.getElementById("indices").innerHTML = `
@@ -118,7 +117,7 @@ Index.html
         // Crypto
         const crypto = await (await fetch("https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum&vs_currencies=usd")).json();
         document.getElementById("crypto").innerHTML = `
-          <div class="card"><div>BTC</div><div class="value"> \]{crypto.bitcoin.usd}</div></div>
+          <div class="card"><div>BTC</div><div class="value">$${crypto.bitcoin.usd}</div></div> // ← এখানে সিনট্যাক্স ঠিক করা হয়েছে
           <div class="card"><div>ETH</div><div class="value">$${crypto.ethereum.usd}</div></div>
         `;
 
@@ -148,7 +147,7 @@ Index.html
       setInterval(() => {
         feed.innerHTML = '';
         items.forEach(item => {
-          feed.innerHTML += `<div class="news-item"><strong>\( {item.title}</strong><br><span style="font-size:0.85rem;color:#aaa;"> \){item.time}</span></div>`;
+          feed.innerHTML += `<div class="news-item"><strong>${item.title}</strong><br><span style="font-size:0.85rem;color:#aaa;">${item.time}</span></div>`; // ← এখানে সিনট্যাক্স ঠিক করা হয়েছে
         });
       }, 8000);
     }
